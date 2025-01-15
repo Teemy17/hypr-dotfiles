@@ -46,6 +46,11 @@ setopt appendhistory
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+# Launch tmux on startup
+if [ -z "$TMUX" ] && [ "$TERM" = "xterm-kitty" ]; then
+  tmux attach || exec tmux new-session && exit;
+fi
+
 # pnpm
 export PNPM_HOME="/home/teemy/.local/share/pnpm"
 case ":$PATH:" in
