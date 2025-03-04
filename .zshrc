@@ -19,8 +19,10 @@ plugins=(
     archlinux
     zsh-autosuggestions
     zsh-syntax-highlighting
+    tmux
 )
 
+ZSH_TMUX_AUTOSTART=true
 source $ZSH/oh-my-zsh.sh
 
 # Check archlinux plugin commands here
@@ -46,10 +48,6 @@ setopt appendhistory
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# Launch tmux on startup
-if [ -z "$TMUX" ] && [ "$TERM" = "xterm-kitty" ]; then
-  tmux attach || exec tmux new-session && exit;
-fi
 
 # pnpm
 export PNPM_HOME="/home/teemy/.local/share/pnpm"
@@ -58,3 +56,12 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+
+# bun completions
+[ -s "/home/teemy/.local/share/reflex/bun/_bun" ] && source "/home/teemy/.local/share/reflex/bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.local/share/reflex/bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+. "$HOME/.local/bin/env"
