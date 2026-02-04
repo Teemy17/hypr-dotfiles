@@ -1,14 +1,11 @@
 {
   "layer": "top",
   "position": "top",
-  "height": 24, // Uncomment to set a fixed height
-  // Note: The layout may break if height is greater than 24
   "mode": "dock",
   "reload_style_on_change": true,
   "gtk-layer-shell": true,
-  "output": "DP-3",
 
-  // === Positions ===
+  // <<--< Positions >-->>
 
   "modules-left": [
     "custom/ws",            // window icon
@@ -30,14 +27,15 @@
     "memory",               // memory
 
     "custom/left4",
-    "custom/cpu",           // cpu
+    "cpu",                  // cpu
     "custom/leftin1",
 
     "custom/left5",
-    "idle_inhibitor",       // distro icon
+    "custom/distro",        // distro icon
     "custom/right2",
 
     "custom/rightin1",
+    "idle_inhibitor",       // idle inhibitor
     "clock#time",           // time
     "custom/right3",
 
@@ -51,13 +49,13 @@
   ],
 
   "modules-right": [
-    "custom/media",         // media info
+    "mpris",                // media info
 
     "custom/left6",
     "pulseaudio",           // output device
 
     "custom/left7",
-    "custom/backlight",     // brightness
+    "backlight",            // brightness
 
     "custom/left8",
     "battery",              // battery
@@ -66,11 +64,13 @@
     "custom/power"          // power button
   ],
 
-  // === Modules ===
+  // <<--< Modules >-->>
 
   "custom/ws": {
-    "format": "  ",
-    "tooltip": false,
+    "exec": "~/.config/waybar/scripts/current-theme.sh",
+    "return-type": "json",
+    "format": " 󰍜 ",
+    "on-click": "~/.config/waybar/scripts/theme-switcher.sh",
     "min-length": 3,
     "max-length": 3
   },
@@ -91,66 +91,62 @@
     "format": "{}",
     "min-length": 5,
 
-    // === Window Titles ===
-
     "rewrite": {
-      
-      // == Desktop ==
-
+      // Desktop
       "": 
-        "<span foreground='#89b4fa'> </span> Hyprland",
+        "<span foreground='#8caaee'> </span> Hyprland",
 
-      // == Terminal ==
-
+      // Terminal
       "~": "  Terminal",
       "zsh": "  Terminal",
       "kitty": "  Terminal",
-      "teemy@teemyarch:(.*)": "  Terminal",
-      "(.*)teemy@teemyarch:~": "  Terminal",
 
-      // == Browser ==
+      // Browser
 
-      "(.*) — Mozilla Firefox": 
-        "<span foreground='#f38ba8'>󰈹 </span> $1",
       "(.*)Mozilla Firefox": 
-        "<span foreground='#f38ba8'>󰈹 </span> Firefox",
+        "<span foreground='#e78284'>󰈹 </span> Firefox",
+      "(.*) — Mozilla Firefox": 
+        "<span foreground='#e78284'>󰈹 </span> $1",
 
-      "(.*) — Zen Browser": 
-        "<span foreground='#f38ba8'>󰈹 </span> $1",
       "(.*)Zen Browser": 
-        "<span foreground='#f38ba8'>󰈹 </span> Zen",
+        "<span foreground='#ef9f76'>󰺕 </span> Zen Browser",
+      "(.*) — Zen Browser": 
+        "<span foreground='#ef9f76'>󰺕 </span> $1",
 
-      // == Development ==
+      // Development
 
       "(.*) - Visual Studio Code": 
-        "<span foreground='#89b4fa'>󰨞 </span> $1",
+        "<span foreground='#8caaee'>󰨞 </span> $1",
       "(.*)Visual Studio Code": 
-        "<span foreground='#89b4fa'>󰨞 </span> Visual Studio Code",
+        "<span foreground='#8caaee'>󰨞 </span> Visual Studio Code",
 
-      "Godot": 
-        "<span foreground='#89b4fa'> </span> Godot Engine",
-      "Godot Engine - (.*)": 
-        "<span foreground='#89b4fa'> </span> $1",
-      "(.*) - Godot Engine": 
-        "<span foreground='#89b4fa'> </span> $1",
+      "nvim": 
+        "<span foreground='#a6d189'> </span> Neovim",
+      "nvim (.*)": 
+        "<span foreground='#a6d189'> </span> $1",
 
-      // == Media ==
+      "vim": 
+        "<span foreground='#a6d189'> </span> Vim",
+      "vim (.*)": 
+        "<span foreground='#a6d189'> </span> $1",
+
+      // Media
 
       "(.*)Spotify": 
-        "<span foreground='#a6e3a1'> </span> Spotify",
+        "<span foreground='#a6d189'> </span> Spotify",
       "(.*)Spotify Premium": 
-        "<span foreground='#a6e3a1'> </span> Spotify Premium",
+        "<span foreground='#a6d189'> </span> Spotify Premium",
 
       "OBS(.*)": 
-        "<span foreground='#a6adc8'>󰐌 </span> OBS Studio",
+        "<span foreground='#a5adce'> </span> OBS Studio",
 
       "VLC media player": 
-        "<span foreground='#fab387'>󰕼 </span> VLC Media Player",
+        "<span foreground='#ef9f76'>󰕼 </span> VLC Media Player",
       "(.*) - VLC media player": 
-        "<span foreground='#fab387'>󰕼 </span> $1",
+        "<span foreground='#ef9f76'>󰕼 </span> $1",
 
-      "GNU Image Manipulation Program": 
-        "<span foreground='#a6adc8'> </span> GNU Image Manipulation Program",
+      "(.*) - mpv": 
+        "<span foreground='#ca9ee6'> </span> $1",
 
       "qView": "  qView",
 
@@ -158,36 +154,30 @@
       "(.*).png": "  $1.png",
       "(.*).svg": "  $1.svg",
 
-      // == Social ==
+      // Social
 
       "vesktop": 
-        "<span foreground='#89b4fa'> </span> Discord",
+        "<span foreground='#8caaee'> </span> Discord",
 
       "• Discord(.*)": "Discord$1",
       "(.*)Discord(.*)": 
-        "<span foreground='#89b4fa'> </span> $1Discord$2",
+        "<span foreground='#8caaee'> </span> $1Discord$2",
 
-      // == Documents ==
+      // Documents
 
       "ONLYOFFICE Desktop Editors": 
-        "<span foreground='#f38ba8'> </span> OnlyOffice Desktop",
+        "<span foreground='#e78284'> </span> OnlyOffice Desktop",
 
       "(.*).docx": 
-        "<span foreground='#89b4fa'> </span> $1.docx",
+        "<span foreground='#8caaee'> </span> $1.docx",
       "(.*).xlsx": 
-        "<span foreground='#a6e3a1'> </span> $1.xlsx",
+        "<span foreground='#a6d189'> </span> $1.xlsx",
       "(.*).pptx": 
-        "<span foreground='#fab387'> </span> $1.pptx",
+        "<span foreground='#ef9f76'> </span> $1.pptx",
       "(.*).pdf": 
-        "<span foreground='#f38ba8'> </span> $1.pdf",
+        "<span foreground='#e78284'> </span> $1.pdf",
 
-      "/": "  File Manager",
-
-      // == System ==
-
-      "Timeshift-gtk": 
-        "<span foreground='#a6e3a1'> </span> Timeshift",
-
+      // System
       "Authenticate": "  Authenticate"
     }
   },
@@ -196,7 +186,6 @@
     "exec": "~/.config/waybar/scripts/cpu-temp.sh",
     "return-type": "json",
     "format": "{}",
-    "tooltip": true,
     "interval": 5,
     "min-length": 8,
     "max-length": 8
@@ -210,37 +199,43 @@
 
     "format": "󰘚 {percentage}%",
     "format-critical": "󰀦 {percentage}%",
-    "tooltip": true,
     "tooltip-format": "Memory Used: {used:0.1f} GB / {total:0.1f} GB",
     "interval": 5,
     "min-length": 7,
     "max-length": 7
   },
 
-  "custom/cpu": {
-    "exec": "~/.config/waybar/scripts/cpu-usage.sh",
-    "return-type": "json",
-    "tooltip": true,
+  "cpu": {
+    "format": "󰻠 {usage}%",
+    "tooltip": false,
     "interval": 5,
     "min-length": 6,
     "max-length": 6
   },
 
-  "idle_inhibitor": {
+  "custom/distro": {
     "format": " ",
-    "tooltip": true,
+    "tooltip": false
+  },
+
+  "idle_inhibitor": {
+    "format": "{icon}",
+
+    "format-icons": {
+      "activated": "󱑎 ",
+      "deactivated": "󱑂 "
+    },
+
     "tooltip-format-activated": "Presentation Mode",
     "tooltip-format-deactivated": "Idle Mode",
-    "start-activated": false,
-    "timeout": 5
+    "start-activated": false
   },
 
   "clock#time": {
-    "format": "󱑂 {:%H:%M}",
-    "tooltip": true,
+    "format": "{:%H:%M}",
     "tooltip-format": "Standard Time: {:%I:%M %p}",
-    "min-length": 8,
-    "max-length": 8
+    "min-length": 6,
+    "max-length": 6
   },
 
   "clock#date": {
@@ -253,11 +248,17 @@
       "on-click-right": "mode",
 
       "format": {
-        "today": "<span color='#f38ba8'><b>{}</b></span>"
+        "months": 
+          "<span color='#babbf1'><b>{}</b></span>",
+        "weekdays": 
+          "<span color='#a5adce' font='7'>{}</span>",
+        "today": 
+          "<span color='#e78284'><b>{}</b></span>"
       }
     },
 
     "actions": {
+      "on-click": "mode",
       "on-click-right": "mode"
     },
 
@@ -269,7 +270,6 @@
     "exec": "~/.config/waybar/scripts/wifi-status.sh",
     "return-type": "json",
     "format": "{}",
-    "tooltip": true,
     "on-click": "~/.config/waybar/scripts/wifi-menu.sh",
     "on-click-right": "kitty --title '󰤨  Network Manager TUI' bash -c nmtui",
     "interval": 1,
@@ -292,7 +292,7 @@
     "tooltip-format-enumerate-connected": 
       "{device_alias}",
     "tooltip-format-enumerate-connected-battery": 
-      "{device_alias}: {device_battery_percentage}%",
+      "{device_alias}: 󰥉 {device_battery_percentage}%",
 
     "on-click": "~/.config/waybar/scripts/bluetooth-menu.sh",
     "on-click-right": "kitty --title '󰂯  Bluetooth TUI' bash -c bluetui",
@@ -306,19 +306,26 @@
     "return-type": "json",
     "format": "{}",
     "on-click": "hyprctl dispatch exec '~/.config/waybar/scripts/system-update.sh up'",
-    "interval": 60,
-    "tooltip": true,
-    "signal": 20, // I'm not sure what this does
+    "interval": 30,
     "min-length": 1,
     "max-length": 1
   },
 
-  "custom/media": {
-    "exec": "~/.config/waybar/scripts/media-player.py",
-    "return-type": "json",
-    "format": "{}",
-    "tooltip": "{tooltip}",
-    "on-click": "playerctl play-pause",
+  "mpris": {
+    "format": "{player_icon} {title} - {artist}",
+    "format-paused": "{status_icon} {title} - {artist}",
+
+    "player-icons": {
+      "default": "󰝚 ",
+      "spotify": "<span foreground='#a6d189'>󰓇 </span>",
+      "firefox": "<span foreground='#e78284'>󰗃 </span>"
+    },
+    "status-icons": {
+      "paused": "<span color='#babbf1'>\u200A\u200A󰏤\u2009\u2009</span>"
+    },
+
+    "tooltip-format": "Playing: {title} - {artist}",
+    "tooltip-format-paused": "Paused: {title} - {artist}",
     "min-length": 5,
     "max-length": 35
   },
@@ -333,7 +340,6 @@
       "headset": "󰋋"
     },
 
-    "tooltip": true,
     "tooltip-format": "Device: {desc}",
     "on-click": "~/.config/waybar/scripts/volume-control.sh -o m",
     "on-scroll-up": "~/.config/waybar/scripts/volume-control.sh -o i",
@@ -342,32 +348,25 @@
     "max-length": 6
   },
 
-  "custom/backlight": {
-    "exec": "~/.config/waybar/scripts/brightness-control.sh",
-    "return-type": "json",
-    "format": "{}",
-    "tooltip": true,
+  "backlight": {
+    "format": "{icon} {percent}%",
+    "format-icons": ["", "", "", "", "", "", "", "", ""],
+    "tooltip": false,
     "on-scroll-up": "~/.config/waybar/scripts/brightness-control.sh -o i",
     "on-scroll-down": "~/.config/waybar/scripts/brightness-control.sh -o d",
-    "interval": 1,
     "min-length": 6,
     "max-length": 6
   },
 
   "battery": {
     "states": {
-      "full": 100,
-      "good": 99,
-      "warning": 30,
-      "critical": 15
+      "warning": 20,
+      "critical": 10
     },
 
     "format": "{icon} {capacity}%",
-    "format-icons": ["󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂"],
-    "format-full": "󱃌 {capacity}%",
-    "format-warning": "󰁻 {capacity}%",
-    "format-critical": "󱃍 {capacity}%",
-    "format-charging": "󱘖 {capacity}%",
+    "format-icons": ["󰂎", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
+    "format-charging": " {capacity}%",
 
     "tooltip-format": "Discharging: {time}",
     "tooltip-format-charging": "Charging: {time}",
@@ -378,11 +377,11 @@
 
   "custom/power": {
     "format": " ",
-    "tooltip": false,
-    "on-click": "~/.config/hypr/scripts/Wlogout.sh" 
+    "tooltip-format": "Power Menu",
+    "on-click": "~/.config/waybar/scripts/power-menu.sh"
   },
 
-  // === Padding ===
+  // <<--< Padding >-->>
 
   "custom/paddw": {
     "format": " ",
@@ -394,7 +393,7 @@
     "tooltip": false
   },
 
-  // == Left Arrows ==
+  // Left Arrows
 
   "custom/left1": {
     "format": "",
@@ -429,7 +428,7 @@
     "tooltip": false
   },
 
-  // == Right Arrows==
+  // Right Arrows
 
   "custom/right1": {
     "format": "",
@@ -452,7 +451,7 @@
     "tooltip": false
   },
 
-  // == Left Inverse ==
+  // Left Inverse
 
   "custom/leftin1": {
     "format": "",
@@ -463,7 +462,7 @@
     "tooltip": false
   },
 
-  // == Right Inverse ==
+  // Right Inverse
 
   "custom/rightin1": {
     "format": "",
